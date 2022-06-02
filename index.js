@@ -3,9 +3,16 @@ const keyboardLetters = [
     ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
     ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
     ["enter", "z", "x", "c", "v", "b", "n", "m", "delete"],
-  ];
+];
 
+//Array general (Contiene las otras listas de letras)
 const listElements = [];
+
+//Array para almacenar todas las letras que se seleccionen
+let myAnswer = []
+
+//Palabra a adivinar
+const secretWord = ["d","a","n","y"];
 
 //Recorrer cada array dentro del array principal
 keyboardLetters.map((letters) => {
@@ -19,9 +26,20 @@ keyboardLetters.map((letters) => {
         //Variable que contiene cada item de la lista de letas en la pantalla
         const listItem = document.createElement("li");
 
-        //Crear un boton para cada item de la lista
-        listItem.innerHTML = `<button onClick="pressLetter()" id="${letter}">${letter}</button>`
-
+        switch(letter){
+            case "enter":
+                //Crear un boton para cada item de la lista
+                listItem.innerHTML = `<button onClick="checkWord()" id="${letter}">${letter}</button>`
+                break;
+            case "delete":
+                //Crear un boton para cada item de la lista
+                listItem.innerHTML = `<button onClick="deleteLetter()" id="${letter}">${letter}</button>`
+                break;
+            default:
+                //Crear un boton para cada item de la lista
+                listItem.innerHTML = `<button onClick="pressLetter()" id="${letter}">${letter}</button>`
+                break;
+        }
         //Agregar el item a la lista
         list.appendChild(listItem);
     });
@@ -36,4 +54,22 @@ keyboard.append(...listElements);
 const pressLetter = () =>{
     const button = event.target;
     console.log(button.id);
+    if(myAnswer.length < 4){
+        myAnswer.push(button.id);
+    }
+    console.log(myAnswer);
+}
+
+const checkWord = () =>{
+    console.log("Revisando palabra...");
+    //.join une los elementos del array de acuerdo a una condicion
+    if(myAnswer.join("") === secretWord.join("")){
+        console.log("Ganaste");
+    }
+}
+
+const deleteLetter = () =>{
+    console.log("Borrando letra...");
+    //Quita el ultimo elemento del array de la respuesta
+    myAnswer.pop();
 }
