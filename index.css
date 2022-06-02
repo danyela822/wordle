@@ -9,3 +9,20 @@ html{
 body{
     font-family: 'Comic Neue', cursive;
 }
+ul{
+    display: flex;
+    list-style: none;
+}
+button{
+    width: 44px;
+    height: 44px;
+    margin: 2px;
+    border: 1px solid gray;
+    border-radius: 12px;
+    background-color: transparent;
+    color: black;
+}
+button:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}
