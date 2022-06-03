@@ -14,6 +14,8 @@ let myAnswer = []
 //Palabra a adivinar
 const secretWord = ["d","a","n","y"];
 
+let positions = [];
+
 //Recorrer cada array dentro del array principal
 keyboardLetters.map((letters) => {
 
@@ -65,7 +67,21 @@ const checkWord = () =>{
     //.join une los elementos del array de acuerdo a una condicion
     if(myAnswer.join("") === secretWord.join("")){
         console.log("Ganaste");
+    }else{
+        for(let i = 0; i < secretWord.length; i++){
+            switch (true) {
+                case myAnswer[i] === secretWord[i]:
+                    positions.push("green");
+                    break;
+                case secretWord.includes(myAnswer[i]):
+                    positions.push("marron");
+                    break;
+                default: positions.push("grey");
+                    break;
+            }
+        }
     }
+    console.log(positions);
 }
 
 const deleteLetter = () =>{
