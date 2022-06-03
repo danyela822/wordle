@@ -58,34 +58,47 @@ const pressLetter = () =>{
     console.log(button.id);
     if(myAnswer.length < 4){
         myAnswer.push(button.id);
+    }else{
+        alert("Tu palabra ya esta completa");
     }
     console.log(myAnswer);
 }
 
 const checkWord = () =>{
     console.log("Revisando palabra...");
-    //.join une los elementos del array de acuerdo a una condicion
-    if(myAnswer.join("") === secretWord.join("")){
-        console.log("Ganaste");
-    }else{
-        for(let i = 0; i < secretWord.length; i++){
-            switch (true) {
-                case myAnswer[i] === secretWord[i]:
-                    positions.push("green");
-                    break;
-                case secretWord.includes(myAnswer[i]):
-                    positions.push("marron");
-                    break;
-                default: positions.push("grey");
-                    break;
+
+    if(myAnswer.length === 4){
+        //.join une los elementos del array de acuerdo a una condicion
+        if(myAnswer.join("") === secretWord.join("")){
+            console.log("Ganaste");
+        }else{
+            for(let i = 0; i < secretWord.length; i++){
+                switch (true) {
+                    case myAnswer[i] === secretWord[i]:
+                        positions.push("green");
+                        break;
+                    case secretWord.includes(myAnswer[i]):
+                        positions.push("marron");
+                        break;
+                    default: positions.push("grey");
+                        break;
+                }
             }
         }
+    }else{
+        alert(`Tu respuesta tiene solo ${myAnswer.length} caracteres`);
     }
+
+    
     console.log(positions);
 }
 
 const deleteLetter = () =>{
     console.log("Borrando letra...");
     //Quita el ultimo elemento del array de la respuesta
-    myAnswer.pop();
+    if(myAnswer.length === 0){
+        alert("No tienes mas elementos que borrar");
+    }else{
+        myAnswer.pop();
+    }
 }
